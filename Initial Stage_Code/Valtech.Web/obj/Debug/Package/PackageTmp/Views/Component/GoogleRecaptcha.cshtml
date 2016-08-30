@@ -1,0 +1,20 @@
+﻿@using Sitecore.Shell
+@using ValtechBaseLine.Web.Custom
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.ReCaptchaModel>
+<div>
+
+    @if (Model != null)
+    {
+        @Html.Raw(Model.IncludeJsScript)
+        <p>
+            <label>Recaptcha:</label>
+            @Html.Raw(string.Format(Model.IncludePageScript,Model.PublicKey))
+        </p>
+
+    }
+
+
+
+</div>
+

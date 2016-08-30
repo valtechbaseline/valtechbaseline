@@ -1,0 +1,41 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.CarouselModel>
+
+@if (Model != null)
+{
+    int count = 0;
+    <!-- Page Content -->
+
+    <div class="banner_slider">
+        <ul class="bxslider" id="bannerSlider">
+            @if (Model.CarouselImages != null && Model.CarouselImages.Any())
+            {
+                var imageList = Model.CarouselImages.ToList();
+                var videoList = Model.CarouselVideos.ToList();
+                for (int i = 0; i < Model.CarouselImages.Count(); i++)
+                {
+                     count = count + 1;
+                    var videoId = "video" + i;
+                    if (videoList[i].VideoLink != null)
+                    {
+                        <li>
+                            <iframe src="@videoList[i].VideoLink.Url" height="390" width="100%" id="@videoId" style="position: relative;"></iframe>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <img src="@imageList[i].Image.Src" alt="@imageList[i].Image.Alt" />
+                           @if (imageList[i].PrimaryLink != null)
+{
+    <a href="@imageList[i].PrimaryLink.Url" class="button">@imageList[i].PrimaryLink.Text</a>
+}
+                        </li>
+                    }
+                }
+            }
+           
+            
+        </ul>
+    </div>
+
+}

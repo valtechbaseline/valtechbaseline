@@ -1,0 +1,58 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IFooterModel>
+
+@if (Model != null)
+{
+    <div class="footer_inner">
+        <div class="row_one">
+            <div class="row_left">
+                <div class="row_left_inner">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    @Html.Sitecore().Placeholder("NewsLetter")
+                    
+                </div>
+            </div>
+            <div class="row_right">
+                <div class='shareaholic-canvas' data-app='share_buttons' data-app-id=''></div>
+            </div>
+
+
+
+
+        </div>
+        <div class="row_two">
+            <div class="row_left">
+                <div class="row_left_inner">
+                    <p>All rights reserved.</p>
+                </div>
+            </div>
+
+
+            <div class="row_right">
+                <div class="row_right_inner">
+                    <ul>
+                        @foreach (var item in Model.NavigationLink)
+                        {
+                            if (item.NavigationLink != null)
+                            {
+                                <li><a href="@item.NavigationLink.Url" title="@item.Tooltip">@item.NavigationName</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="#" title="@item.Tooltip">@item.NavigationName</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center;">Made with <text style="color: red">&hearts;</text> by Valtech in India</div>
+
+
+        </div>
+    </div>
+}
+
+
+
+
+

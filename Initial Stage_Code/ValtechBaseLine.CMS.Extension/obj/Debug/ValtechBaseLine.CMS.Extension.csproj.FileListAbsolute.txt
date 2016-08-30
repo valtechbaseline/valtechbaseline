@@ -1,0 +1,5 @@
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.CMS.Extension.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.CMS.Extension.pdb
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.CMS.Extension\obj\Debug\ValtechBaseLine.CMS.Extension.csprojResolveAssemblyReference.cache
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.CMS.Extension\obj\Debug\ValtechBaseLine.CMS.Extension.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.CMS.Extension\obj\Debug\ValtechBaseLine.CMS.Extension.pdb

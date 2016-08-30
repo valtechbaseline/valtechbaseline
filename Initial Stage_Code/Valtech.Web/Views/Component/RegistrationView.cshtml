@@ -1,0 +1,94 @@
+﻿@using Sitecore.Shell
+@using ValtechBaseLine.Web.Custom
+@using ValtechBaseLine.Web.Helpers
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.RegistrationModel>
+
+<script type="text/javascript">
+
+    function OnSuccessRegistration(data) {
+        if (data.Status === "Success") {
+            window.location.href = data.url;
+            //$("#RegistrationForm").hide();
+            //$("#RegistrationError").html(data.Message);
+        } else {
+            $('#CaptchaArea iframe').attr('src', $('#CaptchaArea iframe').attr('src'));
+            $("#RegistrationError").html(data.Message);
+
+        }
+    }
+
+    $(function () {
+        $("#Salutation").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            $("#SelectedSalutation").val(selectedText);
+        });
+    });
+
+    
+</script>
+
+
+<div class="contact-form-container">
+    <h1 class="intro-big-title alignc">Register</h1>
+    @if (Model != null)
+    {
+        using (Ajax.BeginForm("SubmitRegistrationForm", "Registration",
+            new AjaxOptions
+            {
+                OnSuccess = "OnSuccessRegistration"
+
+            }
+
+            , new { @id = "RegistrationForm", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                @Html.DropDownListFor(x => x.Salutation, Model.SalutationOption, Model.SalutationLabel)
+                @Html.HiddenFor(m => m.SelectedSalutation)
+                @Html.ValidationMessageFor(x => x.Salutation, "", new { @class = "error pull-right" })
+
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.FirstName, new { @placeholder = Model.FirstNameLabel })
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "error pull-right" })
+
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.LastName, new { @placeholder = Model.LastNameLabel })
+                @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "error pull-right" })
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.PhoneNumber, new { @placeholder = Model.PhoneNumberLabel })
+                @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "error pull-right" })
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.EmailId, new { @placeholder = Model.EMailIdLabel })
+                @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "error pull-right" })
+            </p>
+            <p>
+                @Html.PasswordFor(x => x.Password, new { @placeholder = Model.PasswordLabel })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "error pull-right" })
+            </p>
+            <p>
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @placeholder = Model.ConfirmPasswordLabel })
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "error pull-right" })
+            </p>
+            if (Model.ShowRecaptcha)
+            {
+                <p>
+                    <div id="CaptchaArea">
+                        @Html.ReCaptcha()
+                    </div>
+                </p>
+            }
+            <p class="contact-btn">
+                <input type="submit" value="@Model.RegisterButtonLabel" id="submit-contact">
+            </p>
+
+        }
+    }
+    <div id="RegistrationError"></div>
+
+
+</div>

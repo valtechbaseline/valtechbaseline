@@ -1,0 +1,91 @@
+﻿@using ValtechBaseLine.Common
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IGalleryModel>
+<script src="~/Scripts/valtech-scripts/Gallary.js"></script>
+<div class="image_tab_section">
+    @if (Model != null)
+    {
+        int count = 0;
+        
+        
+        <h1>@Editable(Model,x=>x.Heading)</h1>
+        if (Model.ImageList != null && Model.ImageList.Any())
+        {
+            var imageList = Model.ImageList.ToList();
+            var videoList = Model.VideoList.ToList();
+            for (int i = 0; i < Model.ImageList.Count(); i++)
+            {
+                count = count + 1;
+                if (videoList[i].VideoLink != null)
+                {
+                    var videoId = "video" + i;
+                    
+                    if (Sitecore.Context.PageMode.IsExperienceEditor)
+                    {
+                        @RenderLink(videoList[i], x => x.VideoLink, isEditable: true)
+                    }
+                    else
+                    {
+                        <div class="gallery-item">
+                            <h4>@videoList[i].Heading</h4>
+                            <div class="image_tab_section_common">
+                                <iframe src="@videoList[i].VideoLink.Url" height="auto" width="100%" id="@videoId"></iframe>
+                                
+                            </div>
+                            <div class="tab_section_container">
+                                @if (videoList[i].Description != null)
+                                {
+                                    <div class="gallery-short-desc">
+                                        <p> @Editable(videoList[i], x => x.SubHeading)</p>
+                                        <div class="read-more">
+                                            <a class="button">@SitecoreHelper.GetDictionaryValueByKey(Constants.ViewDetailsKey)</a>
+                                        </div>
+                                    </div>
+                                    <div class="image_tab_section_content_common">
+                                        <p> @Editable(videoList[i], x => x.Description)</p>
+                                    </div>
+                                }
+                            </div>
+                            <i class="fa fa-times-circle fa-close-icon" aria-hidden="true"></i>
+                        </div>
+                    }
+
+
+                    //}
+                }
+                else
+                {
+                    <div class="gallery-item">
+                        <h4>@imageList[i].Heading</h4>
+                        <div class="image_tab_section_common">
+                            @if (imageList[i].Image != null)
+                            {
+                                @RenderImage(imageList[i], x => x.Image, new { @class= "image_tab_section_img"}, isEditable: true)
+                            }
+                        </div>
+                        <div class="tab_section_container">
+                            @if (imageList[i].ImageDescription != null)
+                            {
+                                <div class="gallery-short-desc">
+                                    <p> @Editable(imageList[i], x => x.SubHeading)</p>
+                                    <div class="read-more">
+                                        <a class="button">@SitecoreHelper.GetDictionaryValueByKey(Constants.ViewDetailsKey)</a>
+                                    </div>
+                                </div>
+                                    <div class="image_tab_section_content_common">
+                                        <p> @Editable(imageList[i], x => x.ImageDescription)</p>
+                                    </div>
+                                    }
+                                </div>
+                        <i class="fa fa-times-circle fa-close-icon" aria-hidden="true"></i>
+                    </div>
+                }
+            }
+            }
+            
+    }
+</div>
+
+
+<div class="gallery_container overlay">
+    <div class="gallery-inner"></div>
+</div>

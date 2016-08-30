@@ -1,0 +1,28 @@
+﻿@using Sitecore.Shell
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IArticleModel>
+
+@if (Model != null)
+{
+    <!-- Page Content -->
+    <article>
+        @Html.Raw(Model.GoogleMapScript)
+
+        <div class="article-content">
+            @Model.SubHeading
+            @Html.Raw(Model.Description)
+        </div>
+        @if (Model.Image != null)
+        {
+            <img src="@Model.Image.Src" />
+        }
+        <div class="article-content">
+            @Html.Raw(Model.ImageDescription)
+            @*<a href="@Model.Representative.Url" class="button">@Model.Representative.Text</a>*@
+            @if (Sitecore.Context.User.IsAuthenticated)
+            {
+                @RenderLink(Model, x => x.Representative, isEditable: true);
+            }
+        </div>
+    </article>
+}
+

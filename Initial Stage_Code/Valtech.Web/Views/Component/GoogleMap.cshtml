@@ -1,0 +1,52 @@
+﻿@using ValtechBaseLine.Web.Custom
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IArticleModel>
+<div class="row">
+
+    @if (Model.GoogleMapScript != null)
+    {
+       
+        @Html.Raw(Model.GoogleMapScript.Replace("{KEY}", System.Configuration.ConfigurationManager.AppSettings["GoogleMapAPISecretKey"]))
+
+
+        <script language="javascript">
+
+  
+
+    function initMap() {
+
+        if (@Model.Latitude != " " || @Model.Longitude!=" ") {
+            document.getElementById('div_Map').style.display = "block";
+        }
+
+        var myLatLng = { lat: @Model.Latitude, lng: @Model.Longitude};
+
+                map = new google.maps.Map(document.getElementById('map_canvas'), {
+                    zoom: 4,
+                    center: myLatLng
+                });
+
+                marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: '@Model.Headline'
+        });
+    }
+
+    window.onload = initMap;
+        </script>
+
+    <div id="div_Map" style="display:none">
+        <p>
+            <label>Google Map:</label>
+            <div align="center">
+                <div id="map_canvas" style="width: 100%; height: 300px"></div>
+            </div>
+        </p>
+    </div>
+
+    }
+
+
+
+</div>

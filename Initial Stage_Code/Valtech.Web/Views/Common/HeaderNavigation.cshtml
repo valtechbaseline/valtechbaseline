@@ -1,0 +1,51 @@
+﻿@using ValtechBaseLine.Common
+@using ValtechBaseLine.Model.Components
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IHeaderNavigationModel>
+
+@if (Model != null)
+{
+    <div class="menu_list">
+        <div class="menu_search" id="menuSearch">
+            <input type="text" class="search_toggle" data-searchresultspage="@SitecoreHelper.GetSiteSetting().SearchUrl.Url">
+            <i class=" fa fa-search" aria-hidden="true"></i>
+        </div>
+        @ShowTree(Model.Children)
+    </div>
+
+    <div class="menu_icon close">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+}
+
+@helper ShowTree(IEnumerable<IHeaderNavigationModel> menus)
+{
+    <ul>
+        @foreach (var menu in menus)
+        {
+            var title = !string.IsNullOrEmpty(menu.NavigationTitle) ? menu.NavigationTitle : menu.DisplayName;
+            var activeClass = "";
+            if (Sitecore.Context.Item.Name == menu.ItemName)
+            {
+                activeClass = "active";
+            }
+
+            if (!menu.HideNavigation && menu.NavigationTitle!=null)
+            {
+                <li>
+                    <a href="@menu.Url" class=@activeClass>@title</a>
+                </li>
+            }
+            @*if (menu.Children.Any())
+            {
+                @ShowTree(menu.Children)
+            }*@
+
+        }
+    </ul>
+}
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>  
+<control xmlns:def="Definition" xmlns="http://schemas.sitecore.net/Visual-Studio-Intellisense">  
+  <RichText.TestBtn>  
+    <FormDialog Icon="Network/32x32/link.png" Header="Select the Email Tokens"  
+      Text="Treelist to ListBox" OKButton="Insert">  
+      <script Type="text/javascript" Language="javascript" Src="/sitecore/shell/Controls/Rich Text Editor/emailsettings/settings.js">.</script>  
+      <CodeBeside Type="ValtechBaseLine.CMS.Extension.SheerUI.EmailSettings, ValtechBaseLine.CMS.Extension"/>  
+	  <DataContext ID="DialogFolderDataContext"  Root="{2DF952E5-0F7E-4E5A-B6E7-BBFF570F1D55}" />
+         
+			<GridPanel columns="3"  vAlign="top" Height="100%" Width="100%" Cellpadding="5"  GridPanel.VAlign="top">
+			    <GridPanel Width="100%" Height="100%" Style="table-layout:fixed"  GridPanel.Height="100%">
+                    <Scrollbox Class="scScrollbox scFixSize" Width="100%" Height="100%" Background="white" Border="1px inset" Padding="0" GridPanel.Height="100%" GridPanel.Width="100%" GridPanel.Valign="top">
+                        <TreeviewEx  DblClick="ItemSelected"  ID="DialogContentItems" DataContext="DialogFolderDataContext" Root="true" />
+                    </Scrollbox>
+                </GridPanel>
+				<GridPanel Width="80px" Height="100%" Style="table-layout:fixed" GridPanel.Height="100%" GridPanel.Valign="centre">
+                   <Button Header=">>" Width="80px" Click="OnSelectedItem" /> 
+                </GridPanel>
+				<GridPanel Width="100%" Height="100%" Style="table-layout:fixed" GridPanel.Height="100%" GridPanel.Valign="top">
+                    <Scrollbox Class="scScrollbox scFixSize" Width="100%" Height="100%" Background="white" Border="1px inset" Padding="0" GridPanel.Height="100%" GridPanel.Width="100%" GridPanel.Valign="top">
+                        <Listbox ID="ListboxExample" Multiple="true" size="10" Width="100%" Height="100%"  />
+                    </Scrollbox>
+                </GridPanel>
+			</GridPanel>
+    </FormDialog>  
+  </RichText.TestBtn>  
+</control>  

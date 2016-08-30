@@ -1,0 +1,122 @@
+﻿@using Sitecore.ContentSearch.Utilities
+@using Sitecore.Data.DataProviders
+@using Sitecore.Shell.Framework.Commands.Carousel
+@using ValtechBaseLine.Model.Common
+@using Microsoft.Owin.Security
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.IHeaderModel>
+<nav>
+    @if (Model != null)
+    {
+        var homeItem = SitecoreContext.GetHomeItem<IPageModel>();
+        <div class="top-bar">
+            <div class="top-container">
+                <div class="float-left">
+                    <div class="dt-sc-contact-info">
+                        <p>
+                            <i class="fa fa-phone"></i>@Model.HeaderTitle
+                        </p>
+                    </div>
+                </div>
+                <div class="top-right">
+                    <ul>
+                        <li>
+                            @Html.Sitecore().Placeholder("CountrySwitcher")
+                        </li>
+                        @if (Session["AuthUserName"] != null)
+                        {
+                            <li class="lgn_user_name">Hello! @Session["AuthUserName"]</li>
+                             if(Session["LoggedInImgurl"] != null)
+                              {
+                                  <li><img src=@Session["LoggedInImgurl"] alt="Sample Image" width="30px"/></li>
+                              }
+                            <li><a href="@Url.Action("Logout", "Login")">Logout</a> </li>
+                            
+                            
+                        }
+                        else
+                        {
+                            <li><a title="Login" id="login_app"><span class="fa fa-sign-in"></span>Login </a></li> 
+                        }
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="nav_inner">
+            @if (Sitecore.Context.PageMode.IsExperienceEditor)
+            {
+                @RenderImage(Model, x => x.HeaderLogo, isEditable: true)
+            }
+            else
+            {
+                if (@Model.HeaderLogo != null)
+                {
+                    var url = homeItem != null ? homeItem.Url : "#";
+                    <div class="logo_img">
+                        <a href="@url">@RenderImage(Model, x => x.HeaderLogo, isEditable: true)</a>
+                    </div>
+                }
+            }
+
+            
+            @Html.Sitecore().Placeholder("Navigation")
+           
+        </div>
+    }
+</nav>
+
+<div class="login_container overlay">
+    <!--<div class="close_login"><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-left" aria-hidden="true"></i></div>-->
+    <div class="login_inner">
+        <input type="text" placeholder="Email Id" id="emailId" />
+        <input type="password" placeholder="Password" id="password" />
+
+        <label>
+            <input type="checkbox" id="rememberMeChkBox" value="true" />
+            Remember me
+        </label>
+        <br />
+        <br />
+
+        <input type="submit" value="Login" class="user_login" id="login"/>
+        @{
+            //const string returnUrl = "http://valtechbaseline.com/valtech";
+            const string returnUrl = "http://valtechtourism.com/valtech";
+        }
+        <div class="social_login_sec">
+            @Html.Sitecore().Placeholder("SocialLogin")
+        </div>        
+        @*@using (Html.BeginForm("FacebookLogin", "Login", FormMethod.Post, new { returnUrl = returnUrl, provider = "Facebook" }))
+        {
+            <input type="hidden" name="returnUrl" value=@returnUrl />
+            <input type="hidden" name="provider" value="Facebook" />
+            <input type="submit" value="" class="fb_login" />
+        } 
+        @using (Html.BeginForm("GoogleLogin", "Login", FormMethod.Post, new { returnUrl = returnUrl, provider = "Google" }))
+        {
+            <input type="hidden" name="returnUrl" value=@returnUrl />
+            <input type="hidden" name="provider" value="Google" />
+             <input type="submit" value="" class="google_login" />
+        }*@
+       
+        <br clear="all" />
+        <div class="alignc" style="text-align:center"><a href="/Registration"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a></div>
+    </div>
+    <div class="langauge_inner">
+        <ul>
+            <li>
+                <a href="#">xxxxxxxxxxxxx</a>
+            </li>
+            <li>
+                <a href="#">xxxxxxxxxxxxx</a>
+            </li>
+            <li>
+                <a href="#">xxxxxxxxxxxxx</a>
+            </li>
+            <li>
+                <a href="#">xxxxxxxxxxxxx</a>
+            </li>
+        </ul>
+    </div>
+</div>
+

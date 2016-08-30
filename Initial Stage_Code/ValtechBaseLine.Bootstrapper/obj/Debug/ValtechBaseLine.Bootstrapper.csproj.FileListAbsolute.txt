@@ -1,0 +1,6 @@
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Bootstrapper.dll.config
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Bootstrapper.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Bootstrapper.pdb
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Bootstrapper\obj\Debug\ValtechBaseLine.Bootstrapper.csprojResolveAssemblyReference.cache
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Bootstrapper\obj\Debug\ValtechBaseLine.Bootstrapper.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Bootstrapper\obj\Debug\ValtechBaseLine.Bootstrapper.pdb

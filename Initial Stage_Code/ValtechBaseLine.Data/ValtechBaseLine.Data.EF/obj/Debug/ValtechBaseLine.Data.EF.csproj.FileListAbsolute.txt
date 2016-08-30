@@ -1,0 +1,6 @@
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Data.EF.dll.config
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Data.EF.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Data.EF.pdb
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Data\ValtechBaseLine.Data.EF\obj\Debug\ValtechBaseLine.Data.EF.csprojResolveAssemblyReference.cache
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Data\ValtechBaseLine.Data.EF\obj\Debug\ValtechBaseLine.Data.EF.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Data\ValtechBaseLine.Data.EF\obj\Debug\ValtechBaseLine.Data.EF.pdb

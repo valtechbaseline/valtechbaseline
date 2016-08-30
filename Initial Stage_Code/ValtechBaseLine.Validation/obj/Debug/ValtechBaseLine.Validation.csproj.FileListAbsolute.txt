@@ -1,0 +1,5 @@
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Validation.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\Valtech.Web\bin\ValtechBaseLine.Validation.pdb
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Validation\obj\Debug\ValtechBaseLine.Validation.dll
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Validation\obj\Debug\ValtechBaseLine.Validation.pdb
+D:\Valtech-Baseline-Sitecore\Initial Stage_Code\ValtechBaseLine.Validation\obj\Debug\ValtechBaseLine.Validation.csprojResolveAssemblyReference.cache

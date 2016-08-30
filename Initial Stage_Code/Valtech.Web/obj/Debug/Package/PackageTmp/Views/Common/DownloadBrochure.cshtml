@@ -1,0 +1,31 @@
+﻿
+
+<div class="read-more" style="align-content: center" >
+    <a id="goalTracking" class="button">Download Brochure for : @Sitecore.Context.Item.Name</a>
+</div>
+<script>
+    $("#goalTracking").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/api/sitecore/Common/DownloadAnalytics',
+            type: "POST",
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                alert("Thanks for Downloading Brochure");
+                $(".image_tab_section_seperator").attr("style", "");
+            },
+            error: function (response) {
+                alert("Something Bad Happened!");
+            }
+        });
+    });
+</script>
+
+@*<div id="vbDealsPopup" style="display: none">
+   
+    <p>
+        Place holder location showing deals :Download @Sitecore.Context.Item.Name Brochure
+    </p>
+</div>*@
+@Html.Sitecore().Placeholder("Deals")

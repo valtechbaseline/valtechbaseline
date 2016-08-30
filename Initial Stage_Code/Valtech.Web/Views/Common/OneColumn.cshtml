@@ -1,0 +1,9 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Common.IPageModel>
+<div class="container">
+    <!--<h1 class="intro-big-title alignc">@*Model.Headline*@</h1>-->
+    @Html.Sitecore().Placeholder("Body")
+    @if (Model.BackgroundImage != null)
+    {
+        <img src="@Model.BackgroundImage.Src" class="background" />
+    }
+</div>

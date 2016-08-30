@@ -1,0 +1,15 @@
+﻿
+<div class="right-snippet">
+    @if (Model != null)
+    {
+        <h4>@Model.Heading</h4>
+
+        if (Model.Image != null)
+        {
+            <img src="@Model.Image.Src" alt="@Model.Image.Alt" />
+        }
+        <div class="article-content">
+            @Html.Raw(Model.ImageDescription)
+        </div>
+    }
+</div>

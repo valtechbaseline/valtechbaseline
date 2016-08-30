@@ -1,0 +1,76 @@
+﻿
+@using Sitecore.Mvc;
+@using Sitecore.Mvc.Analytics.Extensions
+
+<!DOCTYPE html public "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        @Html.Sitecore().VisitorIdentification()
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Valtech BaseLine Application</title>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css' />
+        <!--Font awesome library -->
+        <link href="~/css/fonts/font-awesome.css" rel="stylesheet" />
+        <!-- Bxslider CSS -->
+        <link href="~/css/jquery.bxslider.css" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <link href="~/css/master.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        
+        <script type='text/javascript' data-cfasync='false' src='//dsms0mj1bbhn4.cloudfront.net/assets/pub/shareaholic.js' data-shr-siteid='4a00290789173e7f478d149165eb399b' async='async'></script>
+    </head>
+<body>
+    <div class="baseline_outer">
+        @Html.Sitecore().Placeholder("Header")
+       
+            @Html.Sitecore().Placeholder("Main")
+
+            @Html.Sitecore().Placeholder("Marquee")
+
+            <footer>
+                @Html.Sitecore().Placeholder("Footer")
+               
+            </footer>
+        </div> 
+    <!--Start Cookie Script-->
+    <script type="text/javascript" charset="UTF-8" src="http://chs03.cookie-script.com/s/eb9e96fddfde9b025e2cea60386f50de.js"></script>
+    <!--End Cookie Script-->
+    <!-- jQuery -->
+    <script src="~/Scripts/valtech-scripts/jquery-1.11.3.min.js"></script>
+    <!-- BxSlider JavaScript -->
+    <script type="text/javascript" src="~/Scripts/valtech-scripts/jquery.bxslider.js"></script>
+    <script type="text/javascript" src="~/Scripts/valtech-scripts/jquery.fitvids.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="~/Scripts/valtech-scripts/master.js"></script>
+    <!-- script for cantact us map api -->
+    <script type="text/javascript">
+        $(document).ready(function ($) {
+            var bxObject = $('#bannerSlider').bxSlider({
+                useCSS: false,
+                video:true,
+                touchEnabled: true,
+                adaptiveHeight: true
+           });
+            $('#bannerSlider .fluid-width-video-wrapper iframe').css('height', bxObject._customViewPortHeight);
+
+            $('#recommendedSlider').bxSlider({
+                useCSS: false,
+                auto: true,
+                video: true,
+                touchEnabled: true,
+                adaptiveHeight: true,
+                minSlides: 1,
+                maxSlides: 4,
+                slideWidth: 290,
+                moveSlides: 1
+            });
+            
+        });
+    </script>  
+  
+</body>
+</html>

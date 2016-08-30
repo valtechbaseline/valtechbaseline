@@ -1,0 +1,41 @@
+﻿@using Sitecore.Shell
+@using ValtechBaseLine.Web.Helpers
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.ContactUsModel>
+
+<div class="contact-form-container">
+   
+
+    <h1 class="intro-big-title alignc"> Contact </h1>
+    @if (Model != null)
+    {
+        
+
+        //using (Ajax.BeginForm("ContactUs", "ContactUs",FormMethod.Post,
+        //    new AjaxOptions
+        //    {
+
+
+        //    }
+
+
+        using (Html.BeginForm("ContactUs", "ContactUs", FormMethod.Post,
+            new { @id = "contact-form", @enctype = "multipart/form-data", @Model.captchaValid }))
+        {
+            @Html.AntiForgeryToken()
+          
+            @Html.TextBoxFor(x => x.FirstName, new { @placeholder = @Html.Sitecore().Translation("FIRSTNAME") })
+            @Html.TextBoxFor(x => x.LastName, new { @placeholder = @Html.Sitecore().Translation("LASTNAME") })
+            @Html.TextBoxFor(x => x.MailSubject, new { @placeholder = @Html.Sitecore().Translation("SUBJECT") })
+            @Html.TextBoxFor(x => x.UserEmail, new { @placeholder = @Html.Sitecore().Translation("EMAIL") })
+            @Html.TextBoxFor(x => x.Message, new { @placeholder = @Html.Sitecore().Translation("MESSAGE") })
+            @Html.ReCaptcha()
+            <input type="file" name="files"><br>
+            <p class="contact-btn">
+                <input type="submit" value="Send message" id="submit-contact">
+                    
+            </p>
+        }
+
+    }
+</div>

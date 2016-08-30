@@ -1,0 +1,29 @@
+﻿@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.Deal>
+<div class="image_tab_section_seperator" style="display: none">
+    <div class="image_tab_section">
+        <h1>@Model.DealsHeading</h1>
+
+        @if (Model.DealsList != null && Model.DealsList.Any())
+        {
+            <ul class="bxslider" id="recommendedSlider">
+                @foreach (var deal in Model.DealsList)
+                {
+                    <li>
+                        <div class="gallery-item-recommended">
+                            <h4>@deal.Heading</h4>
+                            <div class="image_tab_section_common">
+                                <img src="@deal.DealImage.Src" class="image_tab_section_img" alt="" />
+                            </div>
+                            <div class="tab_section_container">
+                                <div class="gallery-short-desc">
+                                    <p>@deal.DealImageDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+
+    </div>
+</div>

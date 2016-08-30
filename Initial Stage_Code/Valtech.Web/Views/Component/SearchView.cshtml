@@ -1,0 +1,44 @@
+﻿@using ValtechBaseLine.Common
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<List<ValtechBaseLine.Model.Search.Articles>>
+<script src="~/Scripts/valtech-scripts/Search.js"></script>
+@if (Model != null && Model.Any())
+{
+    <div class="search-results">
+        <h1 class="intro-big-title alignc">
+            @SitecoreHelper.GetDictionaryValueByKey(Constants.SearchKey).Replace(Constants.SearchedValue, Model[0].SearchedValue)
+        </h1>
+        <div class="search-results-list">
+            @foreach (var result in Model)
+            {
+                <div class="gallery-item">
+                    <h4>@result.Heading</h4>
+                    <div class="image_tab_section_common">
+                        <img src="@result.ImageUrl" class="image_tab_section_img" />
+                    </div>
+                    <div class="tab_section_container">
+                        <div class="gallery-short-desc">
+                            <p>
+                                @result.Description.Substring(0, 100))
+                            </p>
+                            <div class="read-more">
+                                <a  href="@result.Urllink" class="button searchGoalTracking">@SitecoreHelper.GetDictionaryValueByKey(Constants.ViewDetailsKey)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+}
+
+else
+{
+   <div class="search-results">
+    <h1>@SitecoreHelper.GetDictionaryValueByKey(Constants.SearchNoResultKey)</h1>
+        </div>
+}
+
+<script>
+  
+</script>

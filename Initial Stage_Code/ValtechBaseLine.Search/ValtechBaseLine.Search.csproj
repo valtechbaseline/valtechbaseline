@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83DBD1BB-209E-4971-B6BF-98B8DD8E54E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ValtechBaseLine.Search</RootNamespace>
+    <AssemblyName>ValtechBaseLine.Search</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Valtech.Web\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutofacContrib.SolrNet">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\AutofacContrib.SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.SolrNetIntegration">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Castle.Facilities.SolrNetIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Glass.Mapper">
+      <HintPath>..\packages\Glass.Mapper.Sc.4.0.10.61\lib\net45\Glass.Mapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Glass.Mapper.Sc">
+      <HintPath>..\packages\Glass.Mapper.Sc.4.0.10.61\lib\81\Glass.Mapper.Sc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Integration.SolrNet">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Ninject.Integration.SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch">
+      <HintPath>..\References\Sitecore\Sitecore.ContentSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq">
+      <HintPath>..\References\Sitecore\Sitecore.ContentSearch.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.ContentSearch.Linq.Solr">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Sitecore.ContentSearch.Linq.Solr.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\References\Sitecore\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="SolrNet">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\SolrNet.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.SolrNetIntegration">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\StructureMap.SolrNetIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.SolrNetIntegration">
+      <HintPath>..\References\Sitecore.Solr.Support 1.0.0 rev. 160211\bin\Unity.SolrNetIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="ValtechBaseLine.Common">
+      <HintPath>..\Valtech.Web\bin\ValtechBaseLine.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ValtechBaseLine.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Valtech.Web\bin\ValtechBaseLine.Model.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ComputedFields\ArticleCategoryComputedField.cs" />
+    <Compile Include="ComputedFields\ArticleHeadingUpperComputedField.cs" />
+    <Compile Include="ComputedFields\ArticleStateComputedField.cs" />
+    <Compile Include="ComputedFields\ArticleSubtitleUpperComputedField .cs" />
+    <Compile Include="ComputedFields\ArticleDescriptionUpperComputedField.cs" />
+    <Compile Include="ComputedFields\ImageComputedFields.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchIndex.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

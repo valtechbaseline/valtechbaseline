@@ -1,0 +1,30 @@
+﻿@using Sitecore.Shell
+@using ValtechBaseLine.Common
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<List<ValtechBaseLine.Model.Search.Articles>>
+
+@if (Model != null)
+{
+    var count = 0;
+    foreach (var article in Model)
+    {
+
+        {
+            count++;
+        }
+        <article>
+            
+            <h3>
+                @count.@article.Heading
+            </h3>
+            <img src="@article.ImageUrl" />
+            <div class="article-content">
+                @article.SubHeading
+                <div class="read-more">
+                    <a class="button" href="@article.Urllink">@SitecoreHelper.GetDictionaryValueByKey(Constants.ViewDetailsKey)</a>
+                </div>
+            </div>
+           
+        </article>
+
+    }
+}

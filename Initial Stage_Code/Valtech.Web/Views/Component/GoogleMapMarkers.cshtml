@@ -1,0 +1,307 @@
+﻿@using ValtechBaseLine.Web.Custom
+
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.ContactUsModel>
+<div class="row">
+
+    @if (Model.GoogleMap != null)
+    {
+        @Html.Raw(Model.GoogleMap.GoogleMapScript)
+
+
+
+        <script language="javascript">
+
+            var geocoder = null;
+            var map = null;
+            var customerMarker = null;
+            var marker = [];
+            var closest = [];
+            var currentlocation = null;
+
+          
+
+            function initialize() {
+               
+
+                var latitude = document.getElementById('Latitude').value;
+                var longitude = document.getElementById('Longitude').value;
+                var latlng = new google.maps.LatLng(latitude, longitude);
+                var options =
+                {
+                    zoom: 4,
+                    center: new google.maps.LatLng(latitude, longitude),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                    marker: true
+
+                };
+                geocoder = new google.maps.Geocoder();
+                map = new google.maps.Map(document.getElementById("map_canvas"), options);
+               
+                var GoogleMarker = '@Model.GoogleMarker';
+                if (GoogleMarker != null && GoogleMarker != '') {
+                    marker = JSON.parse('@(Model.GoogleMarker)'.replace(/&quot;/g, '"'));
+                }
+                else {
+                    marker = '{}';
+                }
+
+
+                var infoWindow = new google.maps.InfoWindow({ map: map });
+
+
+               
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                       
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            currentlocation: displayLocation(position.coords.latitude, position.coords.longitude)
+                        };
+                      
+                        //document.getElementById('CurrentLatitude').value = pos.lat;
+                        //document.getElementById('CurrentLongitude').value = pos.lng;
+                        if (currentlocation != '' && currentlocation!=null)
+                            codeAddress(pos);
+                        infoWindow.setPosition(pos);
+                        infoWindow.setContent('Location found.');
+                        map.setCenter(pos);
+                    }, function () {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+
+
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                                          'Error: The Geolocation service failed.' :
+                                          'Error: Your browser doesn\'t support geolocation.');
+                }
+            }
+
+            function codeAddress(pos) {
+               
+                //var address = document.getElementById('address').value;
+               // var address = currentlocation;
+                var myLatlng = new google.maps.LatLng(pos.lat, pos.lng);
+                var numResults =2;//parseInt(document.getElementById('numberResults').value);
+                closest = findClosestN(myLatlng, numResults);
+                for (var i = 0; i < closest.length; i++)
+                {
+                    var myLatlng2 = new google.maps.LatLng(closest[i].lat, closest[i].lng);
+                   
+                    var points = new google.maps.Marker
+                        ({
+                            position: myLatlng2,
+                            map: map,
+                            title: closest[i].title,
+
+                        });
+                }
+
+
+               
+            }
+
+            function findClosestN(pt, numberOfResults) {
+                debugger;
+                var closest = [];
+                for (var i = 0; i < marker.length; i++) {
+                    var myLatlng = new google.maps.LatLng(marker[i].lat, marker[i].lng);
+                 
+                    marker[i].distance = google.maps.geometry.spherical.computeDistanceBetween(pt, myLatlng);
+                    //marker[i].setMap(null);
+                    closest.push(marker[i]);
+                }
+                closest.sort(sortByDist);
+                return closest.splice(0, numberOfResults);
+            }
+
+            function sortByDist(a, b) {
+                return (a.distance - b.distance)
+            }
+
+            function calculatedistance()
+            {
+                var request = new XMLHttpRequest();
+
+                var method = 'GET';
+                var url = 'http://maps.googleapis.com/maps/api/geocode/js?v=3&sensor=false&libraries=geometry';
+                var async = true;
+
+                request.open(method, url, async);
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4 && request.status == 200) {
+                        var data = JSON.parse(request.responseText);
+                        var address = data.results[0];
+                        currentlocation = address.formatted_address;
+                        return address.formatted_address;
+                        //document.write(address.formatted_address);
+                    }
+                };
+                request.send();
+
+            }
+
+            function displayLocation(latitude, longitude) {
+            
+                var request = new XMLHttpRequest();
+
+                var method = 'GET';
+                var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+                var async = true;
+
+                request.open(method, url, async);
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4 && request.status == 200) {
+                        var data = JSON.parse(request.responseText);
+                        var address = data.results[0];
+                        currentlocation = address.formatted_address;
+                        return address.formatted_address;
+                        //document.write(address.formatted_address);
+                    }
+                };
+                request.send();
+            };
+
+            var successCallback = function (position) {
+                var x = position.coords.latitude;
+                var y = position.coords.longitude;
+                displayLocation(x, y);
+            };
+
+            var errorCallback = function (error) {
+                var errorMessage = 'Unknown error';
+                switch (error.code) {
+                    case 1:
+                        errorMessage = 'Permission denied';
+                        break;
+                    case 2:
+                        errorMessage = 'Position unavailable';
+                        break;
+                    case 3:
+                        errorMessage = 'Timeout';
+                        break;
+                }
+                document.write(errorMessage);
+            };
+
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 1000,
+                maximumAge: 0
+            };
+
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
+
+
+            function find_closest_marker_old(pos, marker, map, infoWindow) {
+                var lat1 = pos.lat;
+                var lon1 = pos.lng;
+                var pi = Math.PI;
+                var R = 6371; //equatorial radius
+                var distances = [];
+                var closest = -2;
+
+                for (i = 0; i < marker.length; i++) {
+                    var lat2 = marker[i].lat;
+                    var lon2 = marker[i].lng;
+
+                    var chLat = lat2 - lat1;
+                    var chLon = lon2 - lon1;
+
+                    var dLat = chLat * (pi / 180);
+                    var dLon = chLon * (pi / 180);
+
+                    var rLat1 = lat1 * (pi / 180);
+                    var rLat2 = lat2 * (pi / 180);
+
+                    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                                Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(rLat1) * Math.cos(rLat2);
+                    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    var d = R * c;
+
+                    distances[i] = d;
+                    if (closest == -1 || d < distances[closest]) {
+                        closest = i;
+                    }
+
+                    var data = marker[i];
+                    var myLatlng = new google.maps.LatLng(marker[i].lat, marker[i].lng);
+
+                    if (marker[i].title == marker[closest].title) {
+
+                        var points = new google.maps.Marker
+                                    ({
+                                        position: myLatlng,
+                                        map: map,
+                                        title: marker[i].title,
+
+                                    });
+
+
+                        //Attach click event to the marker.
+                        (function (points, data) {
+                            google.maps.event.addListener(points, "click", function (e) {
+                                // var distance = getDistance(pos, myLatlng);
+
+                                //alert(distance + " km");
+                                //Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+                                infoWindow.setContent("<div style = 'width:200px;min-height:40px'>" + data.description + "</div>");
+                                infoWindow.open(map, points);
+                            });
+                        })(points, data);
+
+                        // (debug) The closest marker is:
+                        // alert(marker[closest].title);
+                    }
+                }
+
+
+            }
+
+            //var rad = function (x) {
+            //    debugger;
+            //    return x * Math.PI / 180;
+            //};
+
+            //var getDistance = function (p1, p2) {
+            //    debugger;
+            //    var R = 6378137; // Earth’s mean radius in meter
+            //    var dLat = rad(p2.lat() - p1.lat);
+            //    var dLong = rad(p2.lng() - p1.lng);
+            //    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            //      Math.cos(rad(p1.lat)) * Math.cos(rad(p2.lat())) *
+            //      Math.sin(dLong / 2) * Math.sin(dLong / 2);
+            //    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            //    var d = R * c;
+            //    d = d / 1000;
+            //    d = d.toFixed(1);
+            //    return d; // returns the distance in meter
+            //};
+
+            window.onload = initialize;
+        </script>
+
+        <input type="hidden" value="@Model.GoogleMap.Latitude" id="Latitude" />
+        <input type="hidden" value="@Model.GoogleMap.Longitude" id="Longitude" />
+        <input type="hidden" id="CurrentLatitude" />
+        <input type="hidden" id="CurrentLongitude" />
+        <p>
+            <label>Google Map:</label>
+            <div align="center">
+                <div id="map_canvas" style="width: 80%; height: 300px"></div>
+            </div>
+        </p>
+
+    }
+
+
+
+</div>

@@ -1,0 +1,54 @@
+﻿@using ValtechBaseLine.Web.Helpers
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Common.TrackUserModelCollection>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script>
+    jQuery.noConflict();
+
+
+    $(document).ready(function () {
+
+
+    });
+
+</script>
+<script language="javascript" type="text/javascript">
+
+
+</script>
+
+
+@if (Model != null)
+{
+    if (Model.TrackUserList.Count > 0)
+    {
+        <div class="image_tab_section_seperator">
+            <div class="image_tab_section">
+                <h1>@Html.Sitecore().Translation("Recommended Location")</h1>
+
+                <ul class="bxslider" id="recommendedSlider">
+                    @foreach (var n in Model.TrackUserList)
+                    {
+                        <li>
+                            <div class="gallery-item-recommended">
+                                <h4><a href="@n.ItemUrl">@n.Headline</a></h4>
+                                <div class="image_tab_section_common">
+                                    <a href="@n.ItemUrl">
+                                        <img src="@n.PageImageUrl" width="282px" height="188px" class="image_tab_section_img" alt="" />
+                                    </a>
+                                </div>
+                                <div class="tab_section_container">
+                                    <div class="gallery-short-desc">
+                                        <p>@n.ShortDescription</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    }
+}

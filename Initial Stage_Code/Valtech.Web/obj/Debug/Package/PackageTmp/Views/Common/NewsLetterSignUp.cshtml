@@ -1,0 +1,51 @@
+﻿
+@using ValtechBaseLine.Common
+@inherits Glass.Mapper.Sc.Web.Mvc.GlassView<ValtechBaseLine.Model.Components.NewsLetterSignupModel>
+<script src="~/Scripts/valtech-scripts/NewsLetterSignup.js"></script>
+
+
+@*@Html.TextBoxFor(x => x.NewsLetterEmailId, new {@placeholder = "News Letter"})*@
+<input type="text" placeholder="News Letter" id="NewsLetterEmailId" />
+<input type="button" class="user_login" value="GO" id="NewsletterSignup" disabled="disabled" />
+
+
+
+<div class="newsLetter_container overlay">
+    <div class="newsLetter_inner">
+        @using (Ajax.BeginForm("NewsletterSignupConfirmed", "Common",
+        new AjaxOptions
+        {
+        OnSuccess = "SuccessNewsLetter"
+
+        }
+
+        , new { @id = "NewsLetterForm", @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                @Html.TextBoxFor(x => x.EmailId, new { @placeholder = @SitecoreHelper.GetDictionaryValueByKey(Constants.EmailID), @class = "newsLetter" })
+                @Html.ValidationMessageFor(x => x.EmailId, "", new { @class = "error pull-right" })
+
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.FirstName, new { @placeholder = @SitecoreHelper.GetDictionaryValueByKey(Constants.FirstName), @class = "newsLetter" })
+                @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "error pull-right" })
+
+            </p>
+            <p>
+                @Html.TextBoxFor(x => x.LastName, new { @placeholder = @SitecoreHelper.GetDictionaryValueByKey( Constants.LastName), @class = "newsLetter" })
+                @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "error pull-right" })
+
+            </p>
+            <br />
+            <br />
+            <input type="submit" value="submit" class="user_newsLetter" id="newsLetterSubmit" />
+            <br clear="all" />
+            <br />
+        }
+      
+
+       
+    </div>
+
+</div>
