@@ -27,6 +27,8 @@ namespace ValtechBaseLine.Web.Controllers
     {
         private readonly SitecoreContext _sitecoreContext;
         private readonly ICarouselContract _carousel;   
+        
+        
 
         public CarouselController(ICarouselContract carouselContract)
         {
